@@ -1,0 +1,172 @@
+/* FeaturedCars.css */
+
+.featured-car-featured-cars {
+  text-align: center;
+  background-color: #f8f8f8;
+  padding: 40px 20px;
+}
+
+.intro-section-featured-cars {
+  margin-bottom: 20px;
+}
+
+.intro-section-featured-cars h2 {
+  font-size: 36px;
+  color: #05445E;
+}
+
+.sort-options-featured-cars {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sort-options-featured-cars label {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #05445E;
+}
+
+.sort-options-featured-cars select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none;
+  background-color: #fff;
+}
+
+.sort-options-featured-cars select:hover,
+.sort-options-featured-cars select:focus {
+  border-color: #75E6DA;
+}
+
+.sort-options-featured-cars select option {
+  font-size: 14px;
+}
+
+.car-list-featured-cars {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.car-featured-cars {
+  width: 300px;
+  margin: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-featured-cars:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.car-featured-cars img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+  border-radius: 8px 8px 0 0;
+}
+
+.car-details-featured-cars {
+  padding: 15px;
+}
+
+.car-details-featured-cars h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #05445E;
+}
+
+.car-details-featured-cars p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.action-buttons-featured-cars {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.validate-button-featured-cars,
+.refuse-button-featured-cars {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.validate-button-featured-cars {
+  background-color: #4CAF50;
+}
+
+.refuse-button-featured-cars {
+  background-color: #F44336;
+}
+
+.cta-section-featured-cars {
+  margin-top: 20px;
+}
+
+.cta-section-featured-cars h3 {
+  font-size: 24px;
+  color: #05445E;
+}
+
+.cta-button-featured-cars {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  background-color: #3498db;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button-featured-cars:hover {
+  background-color: #2980b9;
+}
+
+.brand-filter-featured-cars {
+  margin-left: 10px;
+  width: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.brand-filter-featured-cars label {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #05445E;
+}
+
+.brand-filter-featured-cars select {
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  appearance: none;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.brand-filter-featured-cars select:hover,
+.brand-filter-featured-cars select:focus {
+  border-color: #2980b9;
+}
+
+.brand-filter-featured-cars select option {
+  font-size: 14px;
+}

@@ -1,0 +1,46 @@
+/* Sidebar.css */
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #05445E; /* Use your desired background color */
+    padding-top: 20px;
+    color: #fff;
+  }
+  
+  .sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #D4F1F4; /* Use your desired text color */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #75E6DA; /* Use your desired border color */
+    padding-bottom: 10px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    padding: 10px;
+  }
+  
+  .sidebar a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar a:hover {
+    background-color: #75E6DA; /* Change background color on hover */
+  }
+  

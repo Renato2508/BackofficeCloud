@@ -1,0 +1,67 @@
+/* AdminProducts.css */
+
+.mt-5-test-table {
+    margin-top: 5rem;
+  }
+  
+  .mb-4-test-table {
+    margin-bottom: 4rem;
+  }
+  
+  .mb-3-test-table {
+    margin-bottom: 3rem;
+  }
+  
+  .ml-2-test-table {
+    margin-left: 2rem;
+  }
+  
+  .table-test-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+  
+  .table-test-table th,
+  .table-test-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table-test-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .table-bordered-test-table th,
+  .table-bordered-test-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table-bordered-test-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .table-bordered-test-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+  
+  .d-flex-test-table {
+    display: flex;
+  }
+  
+  .justify-content-center-test-table {
+    justify-content: center;
+  }
+  
+  .mx-1-test-table {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  
+  /* Add any additional styles as needed */
+  

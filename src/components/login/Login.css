@@ -1,0 +1,82 @@
+/* Login.css */
+
+.login-background {
+  margin: 0;
+  padding: 0;
+  background: url('../../image/backgroundGT350.jpg') center center fixed;
+  background-size: cover;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  width: 400px; /* Increase width as needed */
+  padding: 40px; /* Increase padding as needed */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: rgba(200, 200, 200, 0.8);
+}
+
+.login-h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  border-bottom: #333 1px solid;
+  margin-bottom: 30px;
+  transition: width 0.3s ease;
+}
+
+/* Login.css */
+/* ... Your existing styles ... */
+
+input {
+  border: none;
+  position: relative;
+  background: transparent;
+  transition: width 0.3s ease, font-size 0.3s ease; /* Add font-size transition */
+  font-size: 16px; /* Adjust font size as needed */
+}
+
+.input {
+  border-bottom: #333 2px solid; /* Increase border-bottom size */
+  margin-bottom: 30px;
+  width: 0;
+  transition: width 0.3s ease, font-size 0.3s ease; /* Add font-size transition */
+}
+
+.input:hover, .input:focus-within {
+  width: 100%;
+  font-size: 18px; /* Increase font size on hover or focus */
+}
+
+button {
+  background-color: #18A5A7;
+  color: #fff;
+  padding: 15px; /* Increase padding */
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 18px; /* Adjust font size as needed */
+}
+
+input:focus {
+  outline: none;
+  background: transparent;
+}
+
+button:hover {
+  background-color: #085c5d;
+}
