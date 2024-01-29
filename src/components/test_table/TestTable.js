@@ -43,7 +43,7 @@ const StatCategorie = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searchTerm2]);
 
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const StatCategorie = () => {
     if (searchTerm2) {
       fetchProductsByCategory();
     }
-  }, [searchTerm2, filteredProducts]);
+  }, [searchTerm2]);
 
   // Obtenir les produits actuels par page
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -124,7 +124,7 @@ const StatCategorie = () => {
           {currentProducts.map((product) => (
               <tr key={id++}>
                 <td>{id++}</td>
-                <td>{product.categorie}</td>
+                <td>{product.marque}</td>
                 <td>{product.vendus}</td>
                 <td>{product.chiffreAffaire}</td>
                 <td>{product.annee}</td>
