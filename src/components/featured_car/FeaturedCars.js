@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import './FeaturedCars.css';
 import { useNavigate } from 'react-router-dom';
 
-import carImage1 from '../../image/Car.jpg';
-
 const FeaturedCars = () => {
   const navigate = useNavigate();
   const [featuredCars, setFeaturedCars] = useState([]);
