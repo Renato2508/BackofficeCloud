@@ -96,7 +96,7 @@ const ModelForm = () => {
           nommarque: formData.marque.split(':')[1], 
           id_categorie: formData.categorie.split(':')[0], 
           nomcategorie: formData.categorie.split(':')[1],
-          nomModel: formData.nom
+          nomModele: formData.nom
         })
       });
 
