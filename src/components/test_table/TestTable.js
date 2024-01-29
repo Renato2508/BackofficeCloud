@@ -43,7 +43,7 @@ const StatCategorie = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searchTerm2]);
 
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const StatCategorie = () => {
     if (searchTerm2) {
       fetchProductsByCategory();
     }
-  }, [searchTerm2, filteredProducts]);
+  }, [searchTerm2]);
 
   // Obtenir les produits actuels par page
   const indexOfLastProduct = currentPage * productsPerPage;
