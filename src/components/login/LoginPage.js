@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const LoginPage = () => {
-  const [login, setLogin] = useState('');
-  const [motDePasse, setMotDePasse] = useState('');
+  const [login, setLogin] = useState('admin');
+  const [motDePasse, setMotDePasse] = useState('admin');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
