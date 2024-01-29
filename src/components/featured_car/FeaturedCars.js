@@ -12,7 +12,7 @@ const FeaturedCars = () => {
   const fetchData = async () => {
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/annonce/notvalide', {
+      const response = await fetch('http://192.168.88.27:8080/annonce/notvalide', {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -70,7 +70,7 @@ const FeaturedCars = () => {
       <div className="car-list-featured-cars">
         {currentCars.map((car) => (
           <div className="car-featured-cars" key={car.id}>
-            <img src={car.voiture.image[0]} alt={`${car.voiture.model.nom} ${car.model.marque.nom}`} />
+            <img src={car.voiture.images[0]} alt={`${car.voiture.model.nom} ${car.model.marque.nom}`} />
             <div className="car-details-featured-cars">
               <h3>{car.voiture.model.nom} {car.model.marque.nom}</h3>
               <p>Année : {car.voiture.anneesortie}</p>
