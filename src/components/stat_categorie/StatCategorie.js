@@ -11,26 +11,42 @@ const StatCategorie = () => {
   const [selectedFilter, setSelectedFilter] = useState('name'); // Initial filter: 'name'
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(5);
+  const [categories, setCategories] = useState([]);
 
-  // Simuler des données de produits
+  
+  const fetchData = async () => {
+
+    try {
+      const authToken = localStorage.getItem('authToken');
+      const response = await fetch('http://192.168.88.27:8080/modele/categorie', {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `Bearer ${authToken}`
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Successful:', data.object);
+        setCategories(data.object); // Assuming the response is an array of cars
+      } else {
+        console.log('Failed one:', data);
+        console.error('Failed two:', response.status, response.statusText);
+        // Handle login failure
+      }
+    } catch (error) {
+      console.error('Error during calling:', error.message);
+      // Handle other errors
+    }
+
+  };
+
   useEffect(() => {
-    // Remplacez cela par la logique pour récupérer les produits depuis votre API
-    const fakeProducts = [
-      { id: 1, name: 'Cat 1', nb_vendu: 10, prix_commission: 19.99, annee: '2020'},
-      { id: 2, name: 'Cat 2', nb_vendu: 10, prix_commission: 19.99, annee: '2021'},
-      { id: 3, name: 'Cat 3', nb_vendu: 10, prix_commission: 19.99, annee: '2021'},
-      { id: 4, name: 'Cat 4', nb_vendu: 10, prix_commission: 19.99, annee: '2022'},
-      { id: 5, name: 'Cat 5', nb_vendu: 10, prix_commission: 19.99, annee: '2023'},
-      { id: 6, name: 'Cat 6', nb_vendu: 10, prix_commission: 19.99, annee: '2024'},
-      { id: 7, name: 'Cat 7', nb_vendu: 10, prix_commission: 19.99, annee: '2024'},
-      { id: 8, name: 'Cat 8', nb_vendu: 10, prix_commission: 19.99, annee: '2024'},
-      { id: 9, name: 'Cat 9', nb_vendu: 10, prix_commission: 19.99, annee: '2020'},
-      { id: 10, name: 'Cat 10', nb_vendu: 10, prix_commission: 19.99 , annee: '2022'},
-    ];
-
-    setProducts(fakeProducts);
-    setFilteredProducts(fakeProducts);
+    fetchData();
   }, []);
+
 
   // Filtrer les produits en fonction du terme de recherche et du filtre sélectionné
   useEffect(() => {
@@ -55,6 +71,41 @@ const StatCategorie = () => {
     }
   }, [searchTerm2, selectedFilter, searchTerm, products]);
 
+  useEffect(() => {
+    const fetchProductsByCategory = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        const response = await fetch('http://192.168.88.27:8080/stats/statsCategorie', {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({categorie : searchTerm2})
+      });
+
+      const data = await response.json();
+
+        if (response.ok) {
+          console.log('Successful products fetch by category:', data.object);
+          setProducts(data.object);
+        } else {
+          console.log('Failed products fetch by category:', data);
+          console.error('Failed products fetch by category:', response.status, response.statusText);
+          // Handle failure or other errors
+        }
+      } catch (error) {
+        console.error('Error during product fetching by category:', error.message);
+        // Handle other errors
+      }
+    };
+
+    // Call the fetchProductsByCategory function when the category changes
+    if (searchTerm2) {
+      fetchProductsByCategory();
+    }
+  }, [searchTerm2]);
+
   // Obtenir les produits actuels par page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -68,8 +119,6 @@ const StatCategorie = () => {
     // Logique de modification, faites ce que vous devez faire avec le produit ayant l'ID donné
     console.log('Modification du produit avec l\'ID', id);
   };
-
-  const uniqueYears = Array.from(new Set(products.map((product) => product.annee)));
 
   return (
     <Container className="mt-5-test-table">
@@ -97,11 +146,11 @@ const StatCategorie = () => {
           }}
           value={searchTerm2}
         >
-          <option value="name">Annee</option>
-          {uniqueYears.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
+          <option value="">All Categories</option>
+          {categories.map(category => (
+              <option key={category._id} value={`${category.nom}`}>
+                    {category.nom}
+              </option>
           ))}
         </Form.Select>
       </div>
