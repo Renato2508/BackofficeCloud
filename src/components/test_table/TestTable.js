@@ -92,12 +92,6 @@ const StatCategorie = () => {
   // Changer de page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Gestion de la modification du produit
-  const handleEditProduct = (id) => {
-    // Logique de modification, faites ce que vous devez faire avec le produit ayant l'ID donné
-    console.log('Modification du produit avec l\'ID', id);
-  };
-
   return (
     <Container className="mt-5-test-table">
       <div className="mb-3-test-table">
@@ -124,7 +118,6 @@ const StatCategorie = () => {
             <th>Nb Voiture Vendu</th>
             <th>Chiffre Affaire</th>
             <th>Annee</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -135,11 +128,6 @@ const StatCategorie = () => {
                 <td>{product.vendus}</td>
                 <td>{product.chiffreAffaire}</td>
                 <td>{product.annee}</td>
-                <td>
-                  <Button variant="warning" onClick={() => handleEditProduct(product.id)}>
-                    Modifier
-                  </Button>
-                </td>
               </tr>
             ))}
         </tbody>
