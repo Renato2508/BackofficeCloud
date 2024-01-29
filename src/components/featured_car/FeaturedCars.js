@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 const FeaturedCars = () => {
   const navigate = useNavigate();
   const [featuredCars, setFeaturedCars] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const carsPerPage = 2;
 
   const fetchData = async () => {
     try {
@@ -40,16 +38,8 @@ const FeaturedCars = () => {
     fetchData();
   }, []);
 
-  const indexOfLastCar = currentPage * carsPerPage;
-  const indexOfFirstCar = indexOfLastCar - carsPerPage;
-  const currentCars = featuredCars.slice(indexOfFirstCar, indexOfLastCar);
-  const totalPages = Math.ceil(featuredCars.length / carsPerPage);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   const handleValidate = async (carId) => {
+    console.log("id : "+carId);
     try {
       const authToken = localStorage.getItem('authToken');
       const response = await fetch('https://cloud-back-voiture-production.up.railway.app/annonce/valide?idannonce='+carId, {
@@ -91,8 +81,8 @@ const FeaturedCars = () => {
         <h2>Featured Cars</h2>
       </div>
       <div className="car-list-featured-cars">
-        {currentCars.map((car) => (
-          <div className="car-featured-cars" key={car.id}>
+        {featuredCars.map((car) => (
+          <div className="car-featured-cars" key={car.idannonce}>
             <img src={car.voiture.images[0]} alt={car.voiture.modele.nom}/>
             <div className="car-details-featured-cars">
               <h3>{car.voiture.modele.marque.nom} {car.voiture.modele.nom}</h3>
@@ -101,26 +91,15 @@ const FeaturedCars = () => {
               <p>Prix : {car.voiture.commission} Ar</p>
               <p onClick={handleDetail}>Voir détail</p>
               <div className="action-buttons-featured-cars">
-                <button onClick={() => handleValidate(car.id)} className="validate-button-featured-cars">
+                <button onClick={() => handleValidate(car.idannonce)} className="validate-button-featured-cars">
                   Valider
                 </button>
-                <button onClick={() => handleRefuse(car.id)} className="refuse-button-featured-cars">
+                <button onClick={() => handleRefuse(car.idannonce)} className="refuse-button-featured-cars">
                   Refuser
                 </button>
               </div>
             </div>
           </div>
-        ))}
-      </div>
-      <div className="pagination-featured-cars">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? 'active-featured-cars' : ''}
-          >
-            {index + 1}
-          </button>
         ))}
       </div>
     </div>
