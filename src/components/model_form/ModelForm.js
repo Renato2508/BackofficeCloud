@@ -35,7 +35,7 @@ const ModelForm = () => {
 
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/modele/marque', {
+      const response = await fetch('http://192.168.43.106:8080/modele/marque', {
         method: 'GET',
         headers: {
           'content-type': 'application/json',

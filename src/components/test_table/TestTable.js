@@ -3,62 +3,91 @@ import { Button, Container, Form } from 'react-bootstrap';
 
 import './TestTable.css'; // Import the custom CSS file
 
-const AdminProducts = () => {
-  const [products, setProducts] = useState([]);
+const StatCategorie = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [searchTerm2, setSearchTerm2] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState('name'); // Initial filter: 'name'
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(5);
+  const [categories, setCategories] = useState([]);
+  let id = 0;
 
-  // Simuler des données de produits
+  
+  const fetchData = async () => {
+
+    try {
+      const authToken = localStorage.getItem('authToken');
+      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/modele/marque', {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `Bearer ${authToken}`
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Successful:', data.object);
+        setCategories(data.object); // Assuming the response is an array of cars
+      } else {
+        console.log('Failed one:', data);
+        console.error('Failed two:', response.status, response.statusText);
+        // Handle login failure
+      }
+    } catch (error) {
+      console.error('Error during calling:', error.message);
+      // Handle other errors
+    }
+
+  };
+
   useEffect(() => {
-    // Remplacez cela par la logique pour récupérer les produits depuis votre API
-    const fakeProducts = [
-      { id: 1, name: 'Marque 1', nb_vendu: 10, prix_commission: 19.99, annee: '2020'},
-      { id: 2, name: 'Marque 2', nb_vendu: 10, prix_commission: 19.99, annee: '2021'},
-      { id: 3, name: 'Marque 3', nb_vendu: 10, prix_commission: 19.99, annee: '2021'},
-      { id: 4, name: 'Marque 4', nb_vendu: 10, prix_commission: 19.99, annee: '2022'},
-      { id: 5, name: 'Marque 5', nb_vendu: 10, prix_commission: 19.99, annee: '2023'},
-      { id: 6, name: 'Marque 6', nb_vendu: 10, prix_commission: 19.99, annee: '2024'},
-      { id: 7, name: 'Marque 7', nb_vendu: 10, prix_commission: 19.99, annee: '2024'},
-      { id: 8, name: 'Marque 8', nb_vendu: 10, prix_commission: 19.99, annee: '2024'},
-      { id: 9, name: 'Marque 9', nb_vendu: 10, prix_commission: 19.99, annee: '2020'},
-      { id: 10, name: 'Marque 10', nb_vendu: 10, prix_commission: 19.99 , annee: '2022'},
-    ];
-
-    setProducts(fakeProducts);
-    setFilteredProducts(fakeProducts);
+    fetchData();
   }, []);
 
-  // Filtrer les produits en fonction du terme de recherche et du filtre sélectionné
+
   useEffect(() => {
-    if(selectedFilter === 'name'){
-      console.log('type 1');
-      console.log('a rechercher '+searchTerm.toLowerCase());
-      const filtered = products.filter((product) =>
-        String(product[selectedFilter]).toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredProducts(filtered);
-    }else if(selectedFilter === 'annee'){
-        if(searchTerm2 === 'name'){
-          console.log('2.1');
-          setFilteredProducts(products);
-        }else{
-          console.log('2.2');
-          const filtered = products.filter((product) =>
-            String(product[selectedFilter]).includes(searchTerm2)
-          );
-          setFilteredProducts(filtered);
+    const fetchProductsByCategory = async () => {
+      console.log(JSON.stringify({categorie : searchTerm2}))
+      try {
+        const authToken = localStorage.getItem('authToken');
+        const response = await fetch('https://cloud-back-voiture-production.up.railway.app/stats/statsMarque', {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({categorie : searchTerm2})
+      });
+
+      const data = await response.json();
+
+        if (response.ok) {
+          console.log('Successful products fetch by category:', data.object);
+          setFilteredProducts(data.object);
+          console.log("eto : "+filteredProducts);
+        } else {
+          console.log('Failed products fetch by category:', data);
+          console.error('Failed products fetch by category:', response.status, response.statusText);
+          // Handle failure or other errors
         }
+      } catch (error) {
+        console.error('Error during product fetching by category:', error.message);
+        // Handle other errors
+      }
+    };
+
+    // Call the fetchProductsByCategory function when the category changes
+    if (searchTerm2) {
+      fetchProductsByCategory();
     }
-  }, [searchTerm2, selectedFilter, searchTerm, products]);
+  }, [searchTerm2, filteredProducts]);
 
   // Obtenir les produits actuels par page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  console.log("currentProducts : "+currentProducts);
 
   // Changer de page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -69,39 +98,21 @@ const AdminProducts = () => {
     console.log('Modification du produit avec l\'ID', id);
   };
 
-  const uniqueYears = Array.from(new Set(products.map((product) => product.annee)));
-
   return (
     <Container className="mt-5-test-table">
-      <h1 className="mb-4-test-table">Statistique Vente Par Marque</h1>
       <div className="mb-3-test-table">
-        <input
-          type="text"
-          placeholder="Rechercher une marque..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setSelectedFilter('name');
-          }}
-        />
         <Form.Select
           className="ml-2-test-table"
           onChange={(e) => {
-            setSelectedFilter(e.target.value);
-            if (e.target.value !== 'name') {
-              setSelectedFilter('annee');
               setSearchTerm2(e.target.value);
-            }else{
-              setSearchTerm2(e.target.value);
-            }
           }}
           value={searchTerm2}
         >
-          <option value="name">Annee</option>
-          {uniqueYears.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
+          <option value="">All Marque</option>
+          {categories.map(category => (
+              <option key={category._id} value={`${category.nom}`}>
+                    {category.nom}
+              </option>
           ))}
         </Form.Select>
       </div>
@@ -111,18 +122,18 @@ const AdminProducts = () => {
             <th>ID</th>
             <th>Marque</th>
             <th>Nb Voiture Vendu</th>
-            <th>Prix Commission</th>
+            <th>Chiffre Affaire</th>
             <th>Annee</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {currentProducts.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.nb_vendu}</td>
-                <td>{product.prix_commission}</td>
+              <tr key={id++}>
+                <td>{id++}</td>
+                <td>{product.categorie}</td>
+                <td>{product.vendus}</td>
+                <td>{product.chiffreAffaire}</td>
                 <td>{product.annee}</td>
                 <td>
                   <Button variant="warning" onClick={() => handleEditProduct(product.id)}>
@@ -151,4 +162,4 @@ const AdminProducts = () => {
   );
 };
 
-export default AdminProducts;
+export default StatCategorie;
