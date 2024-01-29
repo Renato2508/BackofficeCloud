@@ -124,7 +124,7 @@ const StatCategorie = () => {
           {currentProducts.map((product) => (
               <tr key={id++}>
                 <td>{id++}</td>
-                <td>{product.categorie}</td>
+                <td>{product.marque}</td>
                 <td>{product.vendus}</td>
                 <td>{product.chiffreAffaire}</td>
                 <td>{product.annee}</td>
