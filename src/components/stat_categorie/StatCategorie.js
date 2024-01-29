@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 
 import './StatCategorie.css'; // Import the custom CSS file
@@ -11,9 +11,7 @@ const StatCategorie = () => {
   const [categories, setCategories] = useState([]);
   let id = 0;
 
-  
   const fetchData = async () => {
-
     try {
       const authToken = localStorage.getItem('authToken');
       const response = await fetch('https://cloud-back-voiture-production.up.railway.app/modele/categorie', {
@@ -28,68 +26,56 @@ const StatCategorie = () => {
 
       if (response.ok) {
         console.log('Successful:', data.object);
-        setCategories(data.object); // Assuming the response is an array of cars
+        setCategories(data.object);
       } else {
         console.log('Failed one:', data);
         console.error('Failed two:', response.status, response.statusText);
-        // Handle login failure
       }
     } catch (error) {
       console.error('Error during calling:', error.message);
-      // Handle other errors
     }
-
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-
-  useEffect(() => {
-    const fetchProductsByCategory = async () => {
-      console.log(JSON.stringify({categorie : searchTerm2}))
-      try {
-        const authToken = localStorage.getItem('authToken');
-        const response = await fetch('https://cloud-back-voiture-production.up.railway.app/stats/statsCategorie', {
+  const fetchProductsByCategory = useCallback(async () => {
+    try {
+      const authToken = localStorage.getItem('authToken');
+      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/stats/statsCategorie', {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
           'authorization': `Bearer ${authToken}`
         },
-        body: JSON.stringify({categorie : searchTerm2})
+        body: JSON.stringify({ categorie: searchTerm2 })
       });
 
       const data = await response.json();
 
-        if (response.ok) {
-          console.log('Successful products fetch by category:', data.object);
-          setFilteredProducts(data.object);
-          console.log("eto : "+filteredProducts);
-        } else {
-          console.log('Failed products fetch by category:', data);
-          console.error('Failed products fetch by category:', response.status, response.statusText);
-          // Handle failure or other errors
-        }
-      } catch (error) {
-        console.error('Error during product fetching by category:', error.message);
-        // Handle other errors
+      if (response.ok) {
+        console.log('Successful products fetch by category:', data.object);
+        setFilteredProducts(data.object);
+      } else {
+        console.log('Failed products fetch by category:', data);
+        console.error('Failed products fetch by category:', response.status, response.statusText);
       }
-    };
+    } catch (error) {
+      console.error('Error during product fetching by category:', error.message);
+    }
+  }, [searchTerm2]);
 
-    // Call the fetchProductsByCategory function when the category changes
+  useEffect(() => {
     if (searchTerm2) {
       fetchProductsByCategory();
     }
-  }, [searchTerm2, filteredProducts]);
+  }, [searchTerm2, fetchProductsByCategory]);
 
-  // Obtenir les produits actuels par page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-  console.log("currentProducts : "+currentProducts);
 
-  // Changer de page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -97,16 +83,14 @@ const StatCategorie = () => {
       <div className="mb-3-test-table">
         <Form.Select
           className="ml-2-test-table"
-          onChange={(e) => {
-              setSearchTerm2(e.target.value);
-          }}
+          onChange={(e) => setSearchTerm2(e.target.value)}
           value={searchTerm2}
         >
           <option value="">Categorie</option>
           {categories.map(category => (
-              <option key={category._id} value={`${category.nom}`}>
-                    {category.nom}
-              </option>
+            <option key={category._id} value={category.nom}>
+              {category.nom}
+            </option>
           ))}
         </Form.Select>
       </div>
@@ -122,14 +106,14 @@ const StatCategorie = () => {
         </thead>
         <tbody>
           {currentProducts.map((product) => (
-              <tr key={id++}>
-                <td>{id++}</td>
-                <td>{product.categorie}</td>
-                <td>{product.vendus}</td>
-                <td>{product.chiffreAffaire}</td>
-                <td>{product.annee}</td>
-              </tr>
-            ))}
+            <tr key={id++}>
+              <td>{id++}</td>
+              <td>{product.categorie}</td>
+              <td>{product.vendus}</td>
+              <td>{product.chiffreAffaire}</td>
+              <td>{product.annee}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <div className="d-flex justify-content-center-test-table">

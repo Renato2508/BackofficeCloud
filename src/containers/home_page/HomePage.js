@@ -1,23 +1,25 @@
 // HomePage.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import FeaturedCars from '../../components/featured_car/FeaturedCars';
 import CarDetail from '../../components/car_detail/CarDetail';
 import ModernForm from '../../components/modern_form/ModernForm';
 import MarqueForm from '../../components/marque_form/MarqueForm';
 import CategorieForm from '../../components/categorie_form/CategorieForm';
-
-import { useLocation } from 'react-router-dom';
-import Sidebar from '../../components/sidebar/Sidebar';
 import ModelForm from '../../components/model_form/ModelForm';
 import AdminProducts from '../../components/test_table/TestTable';
 import StatCategorie from '../../components/stat_categorie/StatCategorie';
-
+import Sidebar from '../../components/sidebar/Sidebar';
+import { useLocation } from 'react-router-dom';
 
 const HomePage = () => {
   const location = useLocation();
   const type = location?.state?.type;
 
-  console.log("type == " + type);  // <-- Check the value here
+  // Set the current page type in local storage on component mount
+  useEffect(() => {
+    localStorage.setItem('currentPageType', type);
+  }, [type]);
+
   return (
     <div style={{ display: 'flex' }}>
       <Sidebar />
