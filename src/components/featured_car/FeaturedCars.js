@@ -49,8 +49,31 @@ const FeaturedCars = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleValidate = (carId) => {
-    console.log(`Car ${carId} Validated`);
+  const handleValidate = async (carId) => {
+    try {
+      const authToken = localStorage.getItem('authToken');
+      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/annonce/valide?idannonce='+carId, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `Bearer ${authToken}`
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Successful:', data);
+        setFeaturedCars(data.object); // Assuming the response is an array of cars
+      } else {
+        console.log('Failed one:', data);
+        console.error('Failed two:', response.status, response.statusText);
+        // Handle login failure
+      }
+    } catch (error) {
+      console.error('Error during calling:', error.message);
+      // Handle other errors
+    }
   };
 
   const handleRefuse = (carId) => {

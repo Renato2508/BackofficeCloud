@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
-const LoginPage = ({ handleAuthentication }) => {
+const LoginPage = () => {
   const [login, setLogin] = useState('');
   const [motDePasse, setMotDePasse] = useState('');
   const navigate = useNavigate();
@@ -25,8 +25,6 @@ const LoginPage = ({ handleAuthentication }) => {
         console.log('Login successful:', data);
         localStorage.setItem('authToken',data.object.token);
         console.log('local storage : '+localStorage.getItem('authToken'));
-        // Perform any actions upon successful login
-        handleAuthentication();
         navigate('/HomePage', { state: { type: 4 } });
       } else {
         console.log('Login failed:', data)
