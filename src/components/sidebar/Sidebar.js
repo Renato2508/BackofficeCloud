@@ -51,13 +51,13 @@ const Sidebar = () => {
     <div className="sidebar">
       <h2>Menu</h2>
       <ul>
-        <li><a onClick={handleListAnnonce}>List Annonce</a></li>
-        <li><a onClick={handleAjouterComission}>Ajouter Comission</a></li>
-        <li><a onClick={handleAjouterMarque}>Ajouter Marque</a></li>
-        <li><a onClick={handleAjouterCategorie}>Ajouter Categorie</a></li>
-        <li><a onClick={handleAjouterModel}>Ajouter Model</a></li>
-        <li><a onClick={handleStatMarque}>Statistiques Marque</a></li>
-        <li><a onClick={handleStatCategorie}>Statistiques Categorie</a></li>
+        <li><p onClick={handleListAnnonce}>List Annonce</p></li>
+        <li><p onClick={handleAjouterComission}>Ajouter Comission</p></li>
+        <li><p onClick={handleAjouterMarque}>Ajouter Marque</p></li>
+        <li><p onClick={handleAjouterCategorie}>Ajouter Categorie</p></li>
+        <li><p onClick={handleAjouterModel}>Ajouter Model</p></li>
+        <li><p onClick={handleStatMarque}>Statistiques Marque</p></li>
+        <li><p onClick={handleStatCategorie}>Statistiques Categorie</p></li>
         {/* Add more sidebar items as needed */}
       </ul>
     </div>
