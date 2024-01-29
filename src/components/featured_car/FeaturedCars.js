@@ -72,11 +72,11 @@ const FeaturedCars = () => {
       <div className="car-list-featured-cars">
         {currentCars.map((car) => (
           <div className="car-featured-cars" key={car.id}>
-            <img src={carImage1} alt={`${car.make} ${car.model}`} />
+            <img src={car.voiture.image[0]} alt={`${car.voiture.model.nom} ${car.model.marque.nom}`} />
             <div className="car-details-featured-cars">
-              <h3>{car.make} {car.model}</h3>
-              <p>Année : {car.year}</p>
-              <p>Prix : {car.price}</p>
+              <h3>{car.voiture.model.nom} {car.model.marque.nom}</h3>
+              <p>Année : {car.voiture.anneesortie}</p>
+              <p>Prix : {car.voiture.commission} Ar</p>
               <p onClick={handleDetail}>Voir détail</p>
               <div className="action-buttons-featured-cars">
                 <button onClick={() => handleValidate(car.id)} className="validate-button-featured-cars">
