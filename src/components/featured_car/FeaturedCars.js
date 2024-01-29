@@ -70,7 +70,7 @@ const FeaturedCars = () => {
       <div className="car-list-featured-cars">
         {currentCars.map((car) => (
           <div className="car-featured-cars" key={car.id}>
-            <img src={car.voiture.images[0]} />
+            <img src={car.voiture.images[0]} alt={car.voiture.modele.nom}/>
             <div className="car-details-featured-cars">
               <h3>{car.voiture.modele.marque.nom} {car.voiture.modele.nom}</h3>
               <p>{car.voiture.modele.categorie.nom}</p>
