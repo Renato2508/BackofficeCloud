@@ -18,7 +18,7 @@ const StatCategorie = () => {
 
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await fetch('http://192.168.88.27:8080/modele/categorie', {
+      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/modele/categorie', {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
