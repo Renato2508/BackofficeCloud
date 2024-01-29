@@ -11,7 +11,7 @@ const LoginPage = ({ handleAuthentication }) => {
     e.preventDefault();
 
      try {
-      const response = await fetch('http://192.168.88.27:8080/login/auth', {
+      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/login/auth', {
         method: 'POST',
         headers: {
           'content-Type': 'application/json',
