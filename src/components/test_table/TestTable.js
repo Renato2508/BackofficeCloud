@@ -102,7 +102,7 @@ const StatCategorie = () => {
           }}
           value={searchTerm2}
         >
-          <option value="">All Marque</option>
+          <option value="">Marque</option>
           {categories.map(category => (
               <option key={category._id} value={`${category.nom}`}>
                     {category.nom}
