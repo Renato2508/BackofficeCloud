@@ -43,7 +43,7 @@ const StatCategorie = () => {
 
   useEffect(() => {
     fetchData();
-  }, [searchTerm2]);
+  }, []);
 
 
   useEffect(() => {
@@ -65,7 +65,6 @@ const StatCategorie = () => {
         if (response.ok) {
           console.log('Successful products fetch by category:', data.object);
           setFilteredProducts(data.object);
-          console.log("eto : "+filteredProducts);
         } else {
           console.log('Failed products fetch by category:', data);
           console.error('Failed products fetch by category:', response.status, response.statusText);
