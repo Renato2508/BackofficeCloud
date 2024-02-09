@@ -14,7 +14,7 @@ const StatCategorie = () => {
   const fetchData = async () => {
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/modele/categorie', {
+      const response = await fetch('https://cloud-back-voiture-production-3dbf.up.railway.app/modele/categorie', {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -43,7 +43,7 @@ const StatCategorie = () => {
   const fetchProductsByCategory = useCallback(async () => {
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/stats/statsCategorie', {
+      const response = await fetch('https://cloud-back-voiture-production-3dbf.up.railway.app/stats/statsCategorie', {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',

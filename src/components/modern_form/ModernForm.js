@@ -12,7 +12,7 @@ const ModernForm = () => {
 
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/detail/commission', {
+      const response = await fetch('https://cloud-back-voiture-production-3dbf.up.railway.app/detail/commission', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',

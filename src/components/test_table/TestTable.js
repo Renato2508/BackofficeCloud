@@ -16,7 +16,7 @@ const StatCategorie = () => {
 
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await fetch('https://cloud-back-voiture-production.up.railway.app/modele/marque', {
+      const response = await fetch('https://cloud-back-voiture-production-3dbf.up.railway.app/modele/marque', {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -51,7 +51,7 @@ const StatCategorie = () => {
       console.log(JSON.stringify({categorie : searchTerm2}))
       try {
         const authToken = localStorage.getItem('authToken');
-        const response = await fetch('https://cloud-back-voiture-production.up.railway.app/stats/statsMarque', {
+        const response = await fetch('https://cloud-back-voiture-production-3dbf.up.railway.app/stats/statsMarque', {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',

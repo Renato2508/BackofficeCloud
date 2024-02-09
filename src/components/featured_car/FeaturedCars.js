@@ -15,7 +15,7 @@ const FeaturedCars = () => {
     const fetchData = async () => {
       try {
         const authToken = localStorage.getItem('authToken');
-        const response = await fetch(`https://cloud-back-voiture-production.up.railway.app/annonce/notvalide?page=${currentPage}&perPage=${carsPerPage}`, {
+        const response = await fetch(`https://cloud-back-voiture-production-3dbf.up.railway.app/annonce/notvalide?page=${currentPage}&perPage=${carsPerPage}`, {
           method: 'GET',
           headers: {
             'content-type': 'application/json',
@@ -46,7 +46,7 @@ const FeaturedCars = () => {
   const handleValidate = async (carId) => {
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await fetch(`https://cloud-back-voiture-production.up.railway.app/annonce/valide?idannonce=${carId}`, {
+      const response = await fetch(`https://cloud-back-voiture-production-3dbf.up.railway.app/annonce/valide?idannonce=${carId}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
